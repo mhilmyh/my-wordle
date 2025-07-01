@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdkltyxq0fua7"
-path="res://.godot/imported/my-wordle-logo.png-a83e56bc05bed4d2048ab6614a162d92.ctex"
+uid="uid://ge38v2wda20c"
+path="res://.godot/imported/github-logo.png-1376f55497e927ca96a0ad84e24f5195.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://my-wordle-logo.png"
-dest_files=["res://.godot/imported/my-wordle-logo.png-a83e56bc05bed4d2048ab6614a162d92.ctex"]
+source_file="res://github-logo.png"
+dest_files=["res://.godot/imported/github-logo.png-1376f55497e927ca96a0ad84e24f5195.ctex"]
 
 [params]
 

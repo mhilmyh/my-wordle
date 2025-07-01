@@ -15,6 +15,10 @@ run/main_scene="uid://vvghsleoo8kj"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*res://Global.gd"
+
 [editor]
 
 version_control/plugin_name="GitPlugin"

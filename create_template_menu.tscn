@@ -1,0 +1,275 @@
+[gd_scene load_steps=9 format=3 uid="uid://r1pjibjeu3rv"]
+
+[ext_resource type="Texture2D" uid="uid://x8w2uhbxlgpd" path="res://my-wordle-bg.png" id="1_i2c8p"]
+[ext_resource type="Theme" uid="uid://dt7q57jxovxw2" path="res://my-theme.tres" id="2_c83no"]
+[ext_resource type="Script" uid="uid://q5x7pcj1nlvt" path="res://create_template_menu.gd" id="2_lstki"]
+[ext_resource type="Texture2D" uid="uid://ge38v2wda20c" path="res://github-logo.png" id="2_xyca0"]
+[ext_resource type="Script" uid="uid://l2wd0dgvhbbt" path="res://le_name.gd" id="4_lstki"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c83no"]
+texture = ExtResource("1_i2c8p")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+modulate_color = Color(0.497474, 0.497474, 0.497474, 0.960784)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xyca0"]
+bg_color = Color(0.319258, 0.2588, 0.186337, 1)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(0.299865, 0.241603, 0.0758096, 1)
+border_blend = true
+expand_margin_left = 12.0
+expand_margin_top = 12.0
+expand_margin_right = 12.0
+expand_margin_bottom = 12.0
+
+[sub_resource type="Theme" id="Theme_c83no"]
+
+[node name="CreateTemplateMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_c83no")
+script = ExtResource("2_lstki")
+
+[node name="panel_bg" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_c83no")
+
+[node name="panel_form" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.293
+anchor_right = 0.71
+anchor_bottom = 1.0
+offset_left = -0.536011
+offset_top = 31.0
+offset_right = 0.0799561
+offset_bottom = -128.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xyca0")
+
+[node name="label_header" type="Label" parent="panel_form"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.036
+anchor_right = 0.5
+anchor_bottom = 0.036
+offset_left = -86.0
+offset_top = 10.752
+offset_right = 86.0
+offset_bottom = 33.752
+grow_horizontal = 2
+theme = SubResource("Theme_c83no")
+text = "New Wordle Template"
+
+[node name="label_name" type="Label" parent="panel_form"]
+layout_mode = 2
+anchor_left = 0.021
+anchor_top = 0.193
+anchor_right = 0.11
+anchor_bottom = 0.193
+offset_left = -0.101001
+offset_top = -8.057
+offset_right = 0.0899963
+offset_bottom = 7.943
+text = "Name:"
+
+[node name="le_name" type="LineEdit" parent="panel_form"]
+layout_mode = 2
+anchor_left = 0.123
+anchor_top = 0.191
+anchor_right = 0.967
+anchor_bottom = 0.191
+offset_left = -0.163002
+offset_top = -15.399
+offset_right = -0.127045
+offset_bottom = 15.601
+script = ExtResource("4_lstki")
+
+[node name="le_bgpath" type="LineEdit" parent="panel_form"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.295
+anchor_top = 0.273
+anchor_right = 0.969
+anchor_bottom = 0.273
+offset_left = 0.104996
+offset_top = -15.497
+offset_right = -0.0890198
+offset_bottom = 15.503
+
+[node name="le_logopath" type="LineEdit" parent="panel_form"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.198
+anchor_top = 0.355
+anchor_right = 0.969
+anchor_bottom = 0.355
+offset_left = -0.238007
+offset_top = -15.595
+offset_right = -0.0890198
+offset_bottom = 15.405
+
+[node name="le_datapath" type="LineEdit" parent="panel_form"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.183
+anchor_top = 0.512
+anchor_right = 0.965
+anchor_bottom = 0.512
+offset_left = -0.0230026
+offset_top = -15.368
+offset_right = -0.165009
+offset_bottom = 15.632
+
+[node name="le_musicpath" type="LineEdit" parent="panel_form"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21
+anchor_top = 0.433
+anchor_right = 0.967
+anchor_bottom = 0.433
+offset_left = -0.0100021
+offset_top = -15.737
+offset_right = -0.127045
+offset_bottom = 15.263
+
+[node name="label_bgpath" type="Label" parent="panel_form"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.021
+anchor_top = 0.274
+anchor_right = 0.279
+anchor_bottom = 0.274
+offset_left = -0.101001
+offset_top = -7.98601
+offset_right = -0.199005
+offset_bottom = 8.01399
+text = "Background Path:"
+
+[node name="label_logopath" type="Label" parent="panel_form"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.021
+anchor_top = 0.356
+anchor_right = 0.183
+anchor_bottom = 0.356
+offset_left = -0.101001
+offset_top = -8.084
+offset_right = -0.0230026
+offset_bottom = 7.916
+text = "Logo Path:"
+
+[node name="label_musicpath" type="Label" parent="panel_form"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.021
+anchor_top = 0.431
+anchor_right = 0.198
+anchor_bottom = 0.431
+offset_left = -0.101001
+offset_top = -7.75902
+offset_right = -0.238007
+offset_bottom = 8.24098
+text = "Music Path:"
+
+[node name="label_datapath" type="Label" parent="panel_form"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.021
+anchor_top = 0.513
+anchor_right = 0.175
+anchor_bottom = 0.513
+offset_left = -0.101001
+offset_top = -7.85701
+offset_right = -0.175003
+offset_bottom = 8.14299
+text = "Data Path:"
+
+[node name="label_warning" type="Label" parent="panel_form"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.481
+anchor_top = 0.879
+anchor_right = 0.481
+anchor_bottom = 0.879
+offset_left = -214.361
+offset_top = -27.831
+offset_right = 214.639
+offset_bottom = 28.169
+theme_override_font_sizes/font_size = 20
+
+[node name="vcontainer_btn_back" type="VBoxContainer" parent="."]
+layout_mode = 2
+anchor_left = 0.398
+anchor_top = 0.607
+anchor_right = 0.398
+anchor_bottom = 0.607
+offset_left = -105.496
+offset_top = -27.336
+offset_right = 104.504
+offset_bottom = 27.664
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="btn_back" type="Button" parent="vcontainer_btn_back"]
+layout_mode = 2
+size_flags_vertical = 7
+theme = ExtResource("2_c83no")
+text = "Back"
+
+[node name="vcontainer_btn_save" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.595
+anchor_top = 0.605
+anchor_right = 0.595
+anchor_bottom = 0.605
+offset_left = -105.44
+offset_top = -26.04
+offset_right = 104.56
+offset_bottom = 25.96
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="btn_save" type="Button" parent="vcontainer_btn_save"]
+layout_mode = 2
+size_flags_vertical = 7
+theme = ExtResource("2_c83no")
+text = "Save"
+
+[node name="btn_github" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.963
+anchor_top = 0.068
+anchor_right = 0.963
+anchor_bottom = 0.068
+offset_left = -31.3761
+offset_top = -25.064
+offset_right = 30.6238
+offset_bottom = 24.936
+grow_horizontal = 0
+icon = ExtResource("2_xyca0")
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="vcontainer_btn_back/btn_back" to="." method="_on_btn_back_pressed"]
+[connection signal="pressed" from="vcontainer_btn_save/btn_save" to="." method="_on_btn_save_pressed"]

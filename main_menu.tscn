@@ -1,43 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://vvghsleoo8kj"]
+[gd_scene load_steps=9 format=3 uid="uid://vvghsleoo8kj"]
 
 [ext_resource type="Texture2D" uid="uid://x8w2uhbxlgpd" path="res://my-wordle-bg.png" id="1_06t4h"]
+[ext_resource type="Theme" uid="uid://dt7q57jxovxw2" path="res://my-theme.tres" id="1_glbon"]
+[ext_resource type="Script" uid="uid://bseqxa3ndb45h" path="res://main_menu.gd" id="1_jix8l"]
+[ext_resource type="Texture2D" uid="uid://b8v4mkx1jkuvd" path="res://my-wordle-logo.svg" id="2_7vrkn"]
+[ext_resource type="Texture2D" uid="uid://ge38v2wda20c" path="res://github-logo.png" id="3_fu7sn"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7vrkn"]
 texture = ExtResource("1_06t4h")
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
-modulate_color = Color(0.99558, 0.99558, 0.99558, 1)
+modulate_color = Color(0.497474, 0.497474, 0.497474, 0.960784)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fu7sn"]
+texture = ExtResource("2_7vrkn")
 
 [sub_resource type="Theme" id="Theme_fu7sn"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jix8l"]
-bg_color = Color(0.920995, 0.920995, 0.920995, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_glbon"]
-bg_color = Color(0.894922, 0.894922, 0.894922, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nlkkf"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-shadow_color = Color(0.262932, 0.262932, 0.262932, 0.6)
-shadow_size = 8
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qe12f"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -46,6 +24,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_glbon")
+script = ExtResource("1_jix8l")
 
 [node name="panel_bg" type="Panel" parent="."]
 layout_mode = 1
@@ -56,17 +36,31 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_7vrkn")
 
+[node name="panel_logo" type="Panel" parent="panel_bg"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.344
+anchor_right = 0.5
+anchor_bottom = 0.344
+offset_left = -308.0
+offset_top = -115.912
+offset_right = 300.0
+offset_bottom = 116.088
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_fu7sn")
+
 [node name="vcontainer_btn" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 0.701
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 0.701
 offset_left = -123.0
-offset_top = -71.0
+offset_top = -75.248
 offset_right = 123.0
-offset_bottom = 71.0
+offset_bottom = 74.752
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 12
@@ -75,48 +69,47 @@ alignment = 1
 [node name="btn_select_wordle" type="Button" parent="vcontainer_btn"]
 layout_mode = 2
 size_flags_vertical = 7
-theme = SubResource("Theme_fu7sn")
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 18
-theme_override_styles/hover = SubResource("StyleBoxFlat_jix8l")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_glbon")
-theme_override_styles/normal = SubResource("StyleBoxFlat_nlkkf")
+theme = ExtResource("1_glbon")
 text = "Select Wordle"
 
 [node name="btn_create_template" type="Button" parent="vcontainer_btn"]
 layout_mode = 2
 size_flags_vertical = 7
 theme = SubResource("Theme_fu7sn")
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 18
-theme_override_styles/hover = SubResource("StyleBoxFlat_jix8l")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_glbon")
-theme_override_styles/normal = SubResource("StyleBoxFlat_nlkkf")
 text = "Create Template
 "
 
-[node name="Panel" type="Panel" parent="."]
+[node name="btn_clear_save_data" type="Button" parent="vcontainer_btn"]
+layout_mode = 2
+size_flags_vertical = 7
+theme = SubResource("Theme_fu7sn")
+text = "Clear Save Data"
+
+[node name="btn_exit" type="Button" parent="vcontainer_btn"]
+layout_mode = 2
+size_flags_vertical = 7
+theme = SubResource("Theme_fu7sn")
+text = "Exit"
+
+[node name="btn_github" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.257
-anchor_right = 0.5
-anchor_bottom = 0.257
-offset_left = -200.5
-offset_top = -76.536
-offset_right = 200.5
-offset_bottom = 76.464
-grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_qe12f")
+anchor_left = 0.963
+anchor_top = 0.068
+anchor_right = 0.963
+anchor_bottom = 0.068
+offset_left = -31.3761
+offset_top = -25.064
+offset_right = 30.6239
+offset_bottom = 24.936
+grow_horizontal = 0
+theme = ExtResource("1_glbon")
+icon = ExtResource("3_fu7sn")
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="vcontainer_btn/btn_select_wordle" to="." method="_on_btn_select_wordle_pressed"]
+[connection signal="pressed" from="vcontainer_btn/btn_create_template" to="." method="_on_btn_create_template_pressed"]
+[connection signal="pressed" from="vcontainer_btn/btn_clear_save_data" to="." method="_on_btn_clear_save_data_pressed"]
+[connection signal="pressed" from="vcontainer_btn/btn_exit" to="." method="_on_btn_exit_pressed"]
+[connection signal="pressed" from="btn_github" to="." method="_on_btn_github_pressed"]

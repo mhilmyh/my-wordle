@@ -1,0 +1,106 @@
+[gd_scene load_steps=3 format=3 uid="uid://ewppgwtsqru4"]
+
+[ext_resource type="Theme" uid="uid://dt7q57jxovxw2" path="res://my-theme.tres" id="1_ej4tk"]
+[ext_resource type="Script" uid="uid://dpt4orim8ou7q" path="res://gameplay.gd" id="2_oe8ih"]
+
+[node name="Gameplay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ej4tk")
+script = ExtResource("2_oe8ih")
+
+[node name="panel_bg" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="panel_logo" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.174
+anchor_right = 0.5
+anchor_bottom = 0.174
+offset_left = -96.0
+offset_top = -53.752
+offset_right = 92.0
+offset_bottom = 98.248
+
+[node name="panel_tmp_search" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46
+anchor_top = 0.431
+anchor_right = 0.46
+anchor_bottom = 0.431
+offset_left = -254.92
+offset_top = -30.288
+offset_right = 255.08
+offset_bottom = 29.712
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.744
+anchor_top = 0.429
+anchor_right = 0.744
+anchor_bottom = 0.429
+offset_left = -60.088
+offset_top = -25.992
+offset_right = 60.912
+offset_bottom = 26.008
+text = "Submit"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 158.0
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="btn_back" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Back"
+
+[node name="btn_reset" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Reset"
+
+[node name="btn_sound" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Sound"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 4.0
+offset_right = -5.0
+offset_bottom = -4.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/btn_back" to="." method="_on_btn_back_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/btn_reset" to="." method="_on_btn_reset_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/btn_sound" to="." method="_on_btn_sound_pressed"]
