@@ -29,23 +29,21 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_g7vdp")
 
-[node name="vcontainer_btn_back" type="VBoxContainer" parent="panel_bg"]
+[node name="container" type="MarginContainer" parent="panel_bg"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.124
-anchor_top = 0.089
-anchor_right = 0.124
-anchor_bottom = 0.089
-offset_left = -104.848
-offset_top = -27.672
-offset_right = 105.152
-offset_bottom = 27.328
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 12
-alignment = 1
+offset_right = 231.0
+offset_bottom = 112.0
+theme_override_constants/margin_left = 56
+theme_override_constants/margin_top = 56
+theme_override_constants/margin_right = 56
+theme_override_constants/margin_bottom = 56
 
-[node name="btn_back" type="Button" parent="panel_bg/vcontainer_btn_back"]
+[node name="vbox_container" type="VBoxContainer" parent="panel_bg/container"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+
+[node name="btn_back" type="Button" parent="panel_bg/container/vbox_container"]
+custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 size_flags_vertical = 7
 theme = ExtResource("2_xl7w1")
@@ -54,12 +52,20 @@ text = "Back"
 [node name="gc_area" type="GridContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.181
+anchor_top = 0.194
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -0.28801
+offset_top = 0.287994
 grow_horizontal = 2
-grow_vertical = 2
-columns = 3
+grow_vertical = 0
+columns = 6
 
-[connection signal="pressed" from="panel_bg/vcontainer_btn_back/btn_back" to="." method="_on_btn_back_pressed"]
+[node name="confirmation_dialog" type="AcceptDialog" parent="."]
+title = "Please Confirm"
+initial_position = 1
+size = Vector2i(300, 150)
+ok_button_text = "Play"
+
+[connection signal="pressed" from="panel_bg/container/vbox_container/btn_back" to="." method="_on_btn_back_pressed"]
+[connection signal="confirmed" from="confirmation_dialog" to="." method="_on_confirmation_dialog_confirmed"]
+[connection signal="custom_action" from="confirmation_dialog" to="." method="_on_confirmation_dialog_custom_action"]

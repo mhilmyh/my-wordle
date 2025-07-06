@@ -6,6 +6,8 @@ extends Control
 @onready var le_musicpath: LineEdit = $panel_form/le_musicpath
 @onready var le_datapath: LineEdit = $panel_form/le_datapath
 @onready var label_warning: Label = $panel_form/label_warning
+@onready var file_dialog: FileDialog = $file_dialog
+@onready var opening_file_for = ""
 
 func _ready() -> void:
 	label_warning.text = ""
@@ -20,6 +22,11 @@ func _on_btn_save_pressed() -> void:
 	if le_name.text.length() == 0:
 		label_warning.text = "name cannot be empty."
 		return
+	else:
+		for template in Global.templates:
+			if template['name'] == le_name.text:
+				label_warning.text = "name already exist."
+				return
 		
 	if le_bgpath.text.length() == 0:
 		label_warning.text = "background cannot be empty."
@@ -95,3 +102,40 @@ func _on_btn_save_pressed() -> void:
 	
 	Global.save_to_storage()
 	
+func _on_file_dialog_dir_selected(dir: String) -> void:
+	_set_value_from_file_dialog_to_line_edit(dir)
+
+func _on_file_dialog_file_selected(path: String) -> void:
+	_set_value_from_file_dialog_to_line_edit(path)
+
+func _on_file_dialog_files_selected(paths: PackedStringArray) -> void:
+	if len(paths) > 0:
+		_set_value_from_file_dialog_to_line_edit(paths[0])
+	
+func _set_value_from_file_dialog_to_line_edit(value: String) -> void:
+	if opening_file_for == "bg":
+		le_bgpath.text = value
+	elif opening_file_for == "logo":
+		le_logopath.text = value
+	elif opening_file_for == "music":
+		le_musicpath.text = value
+	elif opening_file_for == "data":
+		le_datapath.text = value
+	
+	opening_file_for = ""
+
+func _on_btn_bg_pressed() -> void:
+	opening_file_for = "bg"
+	file_dialog.show()
+
+func _on_btn_logo_pressed() -> void:
+	opening_file_for = "logo"
+	file_dialog.show()
+
+func _on_btn_music_pressed() -> void:
+	opening_file_for = "music"
+	file_dialog.show()
+
+func _on_btn_data_pressed() -> void:
+	opening_file_for = "data"
+	file_dialog.show()

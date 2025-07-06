@@ -10,6 +10,11 @@ bg_color = Color(0.0550927, 0.0590491, 0.0378504, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nhh8a"]
 bg_color = Color(0.282353, 0.294118, 0.231373, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.234447, 0.244647, 0.190154, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oe17v"]
 bg_color = Color(0.282353, 0.294118, 0.231373, 1)
@@ -60,7 +65,7 @@ Button/constants/h_separation = 4
 Button/constants/icon_max_width = 128
 Button/constants/line_spacing = 12
 Button/constants/outline_size = 2
-Button/font_sizes/font_size = 24
+Button/font_sizes/font_size = 20
 Button/fonts/font = ExtResource("1_dhqwm")
 Button/styles/disabled = SubResource("StyleBoxFlat_t8buk")
 Button/styles/disabled_mirrored = SubResource("StyleBoxFlat_dhqwm")

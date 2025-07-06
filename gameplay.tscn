@@ -1,7 +1,105 @@
-[gd_scene load_steps=3 format=3 uid="uid://ewppgwtsqru4"]
+[gd_scene load_steps=11 format=3 uid="uid://ewppgwtsqru4"]
 
 [ext_resource type="Theme" uid="uid://dt7q57jxovxw2" path="res://my-theme.tres" id="1_ej4tk"]
 [ext_resource type="Script" uid="uid://dpt4orim8ou7q" path="res://gameplay.gd" id="2_oe8ih"]
+[ext_resource type="Script" uid="uid://ben5lsbcmlddl" path="res://line_edit.gd" id="3_oe8ih"]
+[ext_resource type="FontFile" uid="uid://clq6vjelhehe1" path="res://Pixellari.ttf" id="4_xuee5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_smepj"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.3)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cbffv"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbudy"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.225, 0.225, 0.225, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0m7cd"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ihbs"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="Theme" id="Theme_oe8ih"]
+Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+Button/colors/icon_focus_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
+Button/constants/align_to_largest_stylebox = 0
+Button/constants/h_separation = 4
+Button/constants/icon_max_width = 0
+Button/constants/line_spacing = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 18
+Button/fonts/font = ExtResource("4_xuee5")
+Button/styles/disabled = SubResource("StyleBoxFlat_smepj")
+Button/styles/focus = SubResource("StyleBoxFlat_cbffv")
+Button/styles/hover = SubResource("StyleBoxFlat_fbudy")
+Button/styles/normal = SubResource("StyleBoxFlat_0m7cd")
+Button/styles/pressed = SubResource("StyleBoxFlat_2ihbs")
 
 [node name="Gameplay" type="Control"]
 layout_mode = 3
@@ -24,41 +122,45 @@ grow_vertical = 2
 [node name="panel_logo" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.174
-anchor_right = 0.5
-anchor_bottom = 0.174
-offset_left = -96.0
-offset_top = -53.752
-offset_right = 92.0
-offset_bottom = 98.248
+anchor_left = 0.521
+anchor_top = 0.151
+anchor_right = 0.521
+anchor_bottom = 0.151
+offset_left = -94.192
+offset_top = -75.848
+offset_right = 93.8079
+offset_bottom = 76.152
 
-[node name="panel_tmp_search" type="Panel" parent="."]
+[node name="vbox_search" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.46
-anchor_top = 0.431
-anchor_right = 0.46
-anchor_bottom = 0.431
-offset_left = -254.92
-offset_top = -30.288
-offset_right = 255.08
-offset_bottom = 29.712
+anchor_left = 0.232
+anchor_top = 0.309
+anchor_right = 0.81
+anchor_bottom = 0.37
+offset_left = -0.264008
+offset_top = -0.23201
+offset_right = -0.120056
+offset_bottom = 0.23999
 
-[node name="Button" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.744
-anchor_top = 0.429
-anchor_right = 0.744
-anchor_bottom = 0.429
-offset_left = -60.088
-offset_top = -25.992
-offset_right = 60.912
-offset_bottom = 26.008
-text = "Submit"
+[node name="search_input" type="LineEdit" parent="vbox_search"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("3_oe8ih")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="scroll_container_search" type="ScrollContainer" parent="vbox_search"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="vbox_search_candidate" type="VBoxContainer" parent="vbox_search/scroll_container_search"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_oe8ih")
+theme_override_constants/separation = 4
+
+[node name="margin_container_side" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -69,38 +171,49 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="vbox_container" type="VBoxContainer" parent="margin_container_side"]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="btn_back" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="btn_back" type="Button" parent="margin_container_side/vbox_container"]
 layout_mode = 2
 text = "Back"
 
-[node name="btn_reset" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="btn_reset" type="Button" parent="margin_container_side/vbox_container"]
 layout_mode = 2
 text = "Reset"
 
-[node name="btn_sound" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="btn_sound" type="Button" parent="margin_container_side/vbox_container"]
 layout_mode = 2
 text = "Sound"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="scroll_container_result" type="ScrollContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.5
+anchor_top = 0.463
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 2.0
-offset_top = 4.0
+offset_top = -0.0240173
 offset_right = -5.0
 offset_bottom = -4.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+[node name="grid_container" type="GridContainer" parent="scroll_container_result"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 8
+columns = 4
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/btn_back" to="." method="_on_btn_back_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/btn_reset" to="." method="_on_btn_reset_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/btn_sound" to="." method="_on_btn_sound_pressed"]
+[node name="sound_player" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+autoplay = true
+
+[node name="input_debouncer" type="Timer" parent="."]
+
+[connection signal="text_changed" from="vbox_search/search_input" to="." method="_on_search_input_text_changed"]
+[connection signal="pressed" from="margin_container_side/vbox_container/btn_back" to="." method="_on_btn_back_pressed"]
+[connection signal="pressed" from="margin_container_side/vbox_container/btn_reset" to="." method="_on_btn_reset_pressed"]
+[connection signal="pressed" from="margin_container_side/vbox_container/btn_sound" to="." method="_on_btn_sound_pressed"]
+[connection signal="finished" from="sound_player" to="." method="_on_sound_player_finished"]

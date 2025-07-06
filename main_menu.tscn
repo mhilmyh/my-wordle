@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://dt7q57jxovxw2" path="res://my-theme.tres" id="1_glbon"]
 [ext_resource type="Script" uid="uid://bseqxa3ndb45h" path="res://main_menu.gd" id="1_jix8l"]
 [ext_resource type="Texture2D" uid="uid://b8v4mkx1jkuvd" path="res://my-wordle-logo.svg" id="2_7vrkn"]
-[ext_resource type="Texture2D" uid="uid://ge38v2wda20c" path="res://github-logo.png" id="3_fu7sn"]
+[ext_resource type="Script" uid="uid://cmkkuqn2bc05m" path="res://btn_select_wordle.gd" id="5_glbon"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7vrkn"]
 texture = ExtResource("1_06t4h")
@@ -54,13 +54,13 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_fu7sn")
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.701
+anchor_top = 0.696
 anchor_right = 0.5
-anchor_bottom = 0.701
+anchor_bottom = 0.696
 offset_left = -123.0
-offset_top = -75.248
+offset_top = -99.008
 offset_right = 123.0
-offset_bottom = 74.752
+offset_bottom = 98.992
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 12
@@ -71,6 +71,7 @@ layout_mode = 2
 size_flags_vertical = 7
 theme = ExtResource("1_glbon")
 text = "Select Wordle"
+script = ExtResource("5_glbon")
 
 [node name="btn_create_template" type="Button" parent="vcontainer_btn"]
 layout_mode = 2
@@ -91,25 +92,7 @@ size_flags_vertical = 7
 theme = SubResource("Theme_fu7sn")
 text = "Exit"
 
-[node name="btn_github" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.963
-anchor_top = 0.068
-anchor_right = 0.963
-anchor_bottom = 0.068
-offset_left = -31.3761
-offset_top = -25.064
-offset_right = 30.6239
-offset_bottom = 24.936
-grow_horizontal = 0
-theme = ExtResource("1_glbon")
-icon = ExtResource("3_fu7sn")
-icon_alignment = 1
-expand_icon = true
-
 [connection signal="pressed" from="vcontainer_btn/btn_select_wordle" to="." method="_on_btn_select_wordle_pressed"]
 [connection signal="pressed" from="vcontainer_btn/btn_create_template" to="." method="_on_btn_create_template_pressed"]
 [connection signal="pressed" from="vcontainer_btn/btn_clear_save_data" to="." method="_on_btn_clear_save_data_pressed"]
 [connection signal="pressed" from="vcontainer_btn/btn_exit" to="." method="_on_btn_exit_pressed"]
-[connection signal="pressed" from="btn_github" to="." method="_on_btn_github_pressed"]

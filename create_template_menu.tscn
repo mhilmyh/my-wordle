@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://r1pjibjeu3rv"]
+[gd_scene load_steps=8 format=3 uid="uid://r1pjibjeu3rv"]
 
 [ext_resource type="Texture2D" uid="uid://x8w2uhbxlgpd" path="res://my-wordle-bg.png" id="1_i2c8p"]
 [ext_resource type="Theme" uid="uid://dt7q57jxovxw2" path="res://my-theme.tres" id="2_c83no"]
 [ext_resource type="Script" uid="uid://q5x7pcj1nlvt" path="res://create_template_menu.gd" id="2_lstki"]
-[ext_resource type="Texture2D" uid="uid://ge38v2wda20c" path="res://github-logo.png" id="2_xyca0"]
 [ext_resource type="Script" uid="uid://l2wd0dgvhbbt" path="res://le_name.gd" id="4_lstki"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c83no"]
@@ -46,6 +45,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_c83no")
 
+[node name="file_dialog" type="FileDialog" parent="."]
+title = "Open a File or Directory"
+initial_position = 2
+ok_button_text = "Open"
+file_mode = 3
+access = 2
+
 [node name="panel_form" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
@@ -78,24 +84,24 @@ text = "New Wordle Template"
 [node name="label_name" type="Label" parent="panel_form"]
 layout_mode = 2
 anchor_left = 0.021
-anchor_top = 0.193
+anchor_top = 0.177
 anchor_right = 0.11
-anchor_bottom = 0.193
+anchor_bottom = 0.209
 offset_left = -0.101001
-offset_top = -8.057
-offset_right = 0.0899963
-offset_bottom = 7.943
+offset_top = -0.233002
+offset_right = 0.0899925
+offset_bottom = 0.118996
 text = "Name:"
 
 [node name="le_name" type="LineEdit" parent="panel_form"]
 layout_mode = 2
 anchor_left = 0.123
 anchor_top = 0.191
-anchor_right = 0.967
+anchor_right = 0.969
 anchor_bottom = 0.191
 offset_left = -0.163002
 offset_top = -15.399
-offset_right = -0.127045
+offset_right = -0.0889587
 offset_bottom = 15.601
 script = ExtResource("4_lstki")
 
@@ -104,124 +110,180 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.295
 anchor_top = 0.273
-anchor_right = 0.969
+anchor_right = 0.817
 anchor_bottom = 0.273
 offset_left = 0.104996
 offset_top = -15.497
-offset_right = -0.0890198
+offset_right = 0.0230103
 offset_bottom = 15.503
+
+[node name="btn_bg" type="Button" parent="panel_form"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.898
+anchor_top = 0.275
+anchor_right = 0.898
+anchor_bottom = 0.275
+offset_left = -32.938
+offset_top = -14.4751
+offset_right = 33.062
+offset_bottom = 14.5249
+theme_override_font_sizes/font_size = 16
+text = "Open"
 
 [node name="le_logopath" type="LineEdit" parent="panel_form"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.198
 anchor_top = 0.355
-anchor_right = 0.969
+anchor_right = 0.819
 anchor_bottom = 0.355
 offset_left = -0.238007
 offset_top = -15.595
-offset_right = -0.0890198
+offset_right = 0.0609741
 offset_bottom = 15.405
 
-[node name="le_datapath" type="LineEdit" parent="panel_form"]
+[node name="btn_logo" type="Button" parent="panel_form"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.183
-anchor_top = 0.512
-anchor_right = 0.965
-anchor_bottom = 0.512
-offset_left = -0.0230026
-offset_top = -15.368
-offset_right = -0.165009
-offset_bottom = 15.632
+anchor_left = 0.898
+anchor_top = 0.355
+anchor_right = 0.898
+anchor_bottom = 0.355
+offset_left = -32.938
+offset_top = -14.595
+offset_right = 33.062
+offset_bottom = 14.405
+theme_override_font_sizes/font_size = 16
+text = "Open"
 
 [node name="le_musicpath" type="LineEdit" parent="panel_form"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.21
 anchor_top = 0.433
-anchor_right = 0.967
+anchor_right = 0.819
 anchor_bottom = 0.433
 offset_left = -0.0100021
 offset_top = -15.737
-offset_right = -0.127045
+offset_right = 0.0610046
 offset_bottom = 15.263
+
+[node name="btn_music" type="Button" parent="panel_form"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.898
+anchor_top = 0.435
+anchor_right = 0.898
+anchor_bottom = 0.435
+offset_left = -32.938
+offset_top = -14.715
+offset_right = 33.062
+offset_bottom = 14.285
+theme_override_font_sizes/font_size = 16
+text = "Open"
+
+[node name="le_datapath" type="LineEdit" parent="panel_form"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.183
+anchor_top = 0.512
+anchor_right = 0.817
+anchor_bottom = 0.512
+offset_left = -0.0230026
+offset_top = -15.368
+offset_right = 0.0230408
+offset_bottom = 15.632
+
+[node name="btn_data" type="Button" parent="panel_form"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.898
+anchor_top = 0.514
+anchor_right = 0.898
+anchor_bottom = 0.514
+offset_left = -32.938
+offset_top = -14.346
+offset_right = 33.062
+offset_bottom = 14.654
+theme_override_font_sizes/font_size = 16
+text = "Open"
 
 [node name="label_bgpath" type="Label" parent="panel_form"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.021
-anchor_top = 0.274
+anchor_top = 0.258
 anchor_right = 0.279
-anchor_bottom = 0.274
+anchor_bottom = 0.29
 offset_left = -0.101001
-offset_top = -7.98601
+offset_top = -0.162025
 offset_right = -0.199005
-offset_bottom = 8.01399
+offset_bottom = 0.189972
 text = "Background Path:"
 
 [node name="label_logopath" type="Label" parent="panel_form"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.021
-anchor_top = 0.356
+anchor_top = 0.339
 anchor_right = 0.183
-anchor_bottom = 0.356
+anchor_bottom = 0.372
 offset_left = -0.101001
-offset_top = -8.084
-offset_right = -0.0230026
-offset_bottom = 7.916
+offset_top = 0.228989
+offset_right = -0.0230103
+offset_bottom = 0.0919952
 text = "Logo Path:"
 
 [node name="label_musicpath" type="Label" parent="panel_form"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.021
-anchor_top = 0.431
+anchor_top = 0.415
 anchor_right = 0.198
-anchor_bottom = 0.431
+anchor_bottom = 0.448
 offset_left = -0.101001
-offset_top = -7.75902
-offset_right = -0.238007
-offset_bottom = 8.24098
+offset_top = 0.0649719
+offset_right = -0.238014
+offset_bottom = -0.0720215
 text = "Music Path:"
 
 [node name="label_datapath" type="Label" parent="panel_form"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.021
-anchor_top = 0.513
+anchor_top = 0.497
 anchor_right = 0.175
-anchor_bottom = 0.513
+anchor_bottom = 0.53
 offset_left = -0.101001
-offset_top = -7.85701
-offset_right = -0.175003
-offset_bottom = 8.14299
+offset_top = -0.0330048
+offset_right = -0.175011
+offset_bottom = -0.170013
 text = "Data Path:"
 
 [node name="label_warning" type="Label" parent="panel_form"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.481
-anchor_top = 0.879
-anchor_right = 0.481
-anchor_bottom = 0.879
-offset_left = -214.361
-offset_top = -27.831
-offset_right = 214.639
-offset_bottom = 28.169
+anchor_left = 0.491
+anchor_top = 0.763
+anchor_right = 0.491
+anchor_bottom = 0.763
+offset_left = -218.171
+offset_top = -34.107
+offset_right = 217.829
+offset_bottom = 33.893
 theme_override_font_sizes/font_size = 20
 
 [node name="vcontainer_btn_back" type="VBoxContainer" parent="."]
 layout_mode = 2
 anchor_left = 0.398
-anchor_top = 0.607
+anchor_top = 0.526
 anchor_right = 0.398
-anchor_bottom = 0.607
-offset_left = -105.496
-offset_top = -27.336
-offset_right = 104.504
-offset_bottom = 27.664
+anchor_bottom = 0.526
+offset_left = -104.496
+offset_top = -16.848
+offset_right = 105.504
+offset_bottom = 17.152
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 12
@@ -237,13 +299,13 @@ text = "Back"
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.595
-anchor_top = 0.605
+anchor_top = 0.526
 anchor_right = 0.595
-anchor_bottom = 0.605
-offset_left = -105.44
-offset_top = -26.04
-offset_right = 104.56
-offset_bottom = 25.96
+anchor_bottom = 0.526
+offset_left = -104.44
+offset_top = -16.848
+offset_right = 105.56
+offset_bottom = 17.152
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 12
@@ -255,21 +317,12 @@ size_flags_vertical = 7
 theme = ExtResource("2_c83no")
 text = "Save"
 
-[node name="btn_github" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.963
-anchor_top = 0.068
-anchor_right = 0.963
-anchor_bottom = 0.068
-offset_left = -31.3761
-offset_top = -25.064
-offset_right = 30.6238
-offset_bottom = 24.936
-grow_horizontal = 0
-icon = ExtResource("2_xyca0")
-icon_alignment = 1
-expand_icon = true
-
+[connection signal="dir_selected" from="file_dialog" to="." method="_on_file_dialog_dir_selected"]
+[connection signal="file_selected" from="file_dialog" to="." method="_on_file_dialog_file_selected"]
+[connection signal="files_selected" from="file_dialog" to="." method="_on_file_dialog_files_selected"]
+[connection signal="pressed" from="panel_form/btn_bg" to="." method="_on_btn_bg_pressed"]
+[connection signal="pressed" from="panel_form/btn_logo" to="." method="_on_btn_logo_pressed"]
+[connection signal="pressed" from="panel_form/btn_music" to="." method="_on_btn_music_pressed"]
+[connection signal="pressed" from="panel_form/btn_data" to="." method="_on_btn_data_pressed"]
 [connection signal="pressed" from="vcontainer_btn_back/btn_back" to="." method="_on_btn_back_pressed"]
 [connection signal="pressed" from="vcontainer_btn_save/btn_save" to="." method="_on_btn_save_pressed"]

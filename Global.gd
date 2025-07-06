@@ -5,7 +5,6 @@ var templates: Array = []
 var wordle_data: Array = []
 var wordle_headers: Array = []
 var wordle_type: Dictionary = {}
-
 var selected_wordle: int = -1
 
 func reset_wordle_selection():
@@ -30,11 +29,18 @@ func add_template(
 	})
 	
 func remove_template(name: String):
+	var target_index = -1
 	for i in range(len(templates)):
-		if templates[i].name == name:
-			templates.erase(i)
-			return
-			
+		if templates[i]['name'] == name:
+			target_index = i
+			break
+	templates.remove_at(target_index)
+
+func delete_selected_template():
+	templates.remove_at(selected_wordle)
+	save_to_storage()
+
+
 func save_to_storage():
 	var save_file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
 	# JSON provides a static method to serialized JSON string.
@@ -81,10 +87,10 @@ func load_from_storage():
 		else:
 			print("JSON Parse Invalid: Something wrong!")
 			
-func load_wordle_data_by_index(index: int):
+func load_wordle_data_by_index(index: int) -> Array:
 	if index < 0 or index >= len(templates):
-		return
-	parse_csv(templates[index].datapath)
+		return []
+	return parse_csv(templates[index].datapath)
 			
 func parse_csv(file_path: String) -> Array:
 	wordle_data = []
@@ -96,6 +102,10 @@ func parse_csv(file_path: String) -> Array:
 		while not fa.eof_reached():
 			var line = fa.get_line()
 			var row = line.split(",")  # Split by commas
+			
+			if len(row) == 0 or (len(row) == 1 and row[0] == ""):
+				break
+				
 			if len(wordle_headers) == 0:
 				for col in row:
 					var column_configs: Array = col.split(":")
@@ -103,8 +113,17 @@ func parse_csv(file_path: String) -> Array:
 						wordle_headers.append(column_configs[0])
 					if len(column_configs) > 1:
 						wordle_type[column_configs[0]] = column_configs[1]
+					if column_configs[0] not in wordle_type or not is_supported_wordle_type(wordle_type[column_configs[0]]):
+						wordle_type[column_configs[0]] = "str"
 			else:
 				wordle_data.append(row)
+				
 		fa.close()
 	
 	return wordle_data
+	
+func is_supported_wordle_type(value: String) -> bool:
+	if value == "":
+		return false
+		
+	return value in ["str", "int", "float", "enum"]
