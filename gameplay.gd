@@ -5,6 +5,7 @@ extends Control
 @onready var searchCandidateContainer: VBoxContainer = $vbox_search/bg_search_result/scroll_container_search/vbox_search_candidate
 @onready var searchCandidatePanel: Panel = $vbox_search/bg_search_result
 @onready var wordleData: Array = []
+@onready var scoreWidget: Label = $score_margin/score
 
 @onready var inputDebouncer = $input_debouncer
 @onready var lastKnownInput = ""
@@ -17,7 +18,6 @@ extends Control
 @onready var alreadyPicked = {}
 @onready var randomCandidatePicked = -1
 @onready var judgeContainer: GridContainer = $result_margin/scroll_container_result/grid_container
-@onready var remainingScore = 100.0
 
 func _ready() -> void:
 	inputDebouncer.connect("timeout", _filter_loaded_candidates)
@@ -97,12 +97,15 @@ func _guess_candidate_click(current_index: int):
 	alreadyPicked[current_index] = true
 	
 	searchCandidatePanel.hide()
-		
+	
+	var correctGuess = 0
+	
 	for i in range(len(row)):
 		var styleBox = StyleBoxFlat.new()
 		var result = Global.compare_cell(i, randomCandidatePicked, current_index)
 		if result == 1:
 			styleBox.bg_color = correctBgColor
+			correctGuess += 1
 		elif result == 2:
 			styleBox.bg_color = partialCorrectBgColor
 		else:
@@ -115,6 +118,16 @@ func _guess_candidate_click(current_index: int):
 		var gridItem = _generate_default_grid_items(cell)
 		gridItem.add_theme_stylebox_override("panel", styleBox)
 		judgeContainer.add_child(gridItem)
+	
+	# correct guess found
+	if correctGuess == len(row):
+		# TODO: show dialog saying "you win!"
+		pass
+	else:
+		var currentGuessSoFar = (judgeContainer.get_child_count() / len(Global.wordle_headers))-1
+		var totalAvailableGuess = len(wordleData)
+		print(totalAvailableGuess," ", currentGuessSoFar)
+		scoreWidget.text = "Score: " + str(100.0 * (totalAvailableGuess-currentGuessSoFar) / totalAvailableGuess)
 
 func _render_column_header():
 	judgeContainer.columns = len(Global.wordle_headers)
@@ -130,12 +143,12 @@ func _on_btn_back_pressed() -> void:
 	Global.reset_wordle_selection()
 
 func _on_btn_reset_pressed() -> void:
+	# TODO: show dialog saying "are you sure ?"
 	for child in judgeContainer.get_children():
 		judgeContainer.remove_child(child)
 	_render_column_header()
 	
 	alreadyPicked = {}
-	remainingScore = 100.0
 	
 	_pick_random_candidate()
 
