@@ -126,7 +126,6 @@ func _guess_candidate_click(current_index: int):
 	else:
 		var currentGuessSoFar = (judgeContainer.get_child_count() / len(Global.wordle_headers))-1
 		var totalAvailableGuess = len(wordleData)
-		print(totalAvailableGuess," ", currentGuessSoFar)
 		scoreWidget.text = "Score: " + str(100.0 * (totalAvailableGuess-currentGuessSoFar) / totalAvailableGuess)
 
 func _render_column_header():
