@@ -2,13 +2,22 @@ extends Control
 
 @onready var guessing_list: Array = []
 @onready var audioStreamPlayer: AudioStreamPlayer = $sound_player
-@onready var searchCandidateContainer: VBoxContainer = $vbox_search/scroll_container_search/vbox_search_candidate
+@onready var searchCandidateContainer: VBoxContainer = $vbox_search/bg_search_result/scroll_container_search/vbox_search_candidate
+@onready var searchCandidatePanel: Panel = $vbox_search/bg_search_result
 @onready var wordleData: Array = []
-@onready var randomCandidatePicked = -1
-@onready var judgeContainer: GridContainer = $scroll_container_result/grid_container
 
 @onready var inputDebouncer = $input_debouncer
 @onready var lastKnownInput = ""
+
+@onready var correctBgColor = Color(0.2, 0.8, 0.2)
+@onready var partialCorrectBgColor = Color(0.8, 0.8, 0.2)
+@onready var wrongBgColor = Color(0.8, 0.2, 0.2)
+
+# reset able
+@onready var alreadyPicked = {}
+@onready var randomCandidatePicked = -1
+@onready var judgeContainer: GridContainer = $result_margin/scroll_container_result/grid_container
+@onready var remainingScore = 100.0
 
 func _ready() -> void:
 	inputDebouncer.connect("timeout", _filter_loaded_candidates)
@@ -53,6 +62,8 @@ func _draw_logo():
 	$panel_logo.add_theme_stylebox_override("panel", style_box)
 	
 func _load_search_candidates():
+	searchCandidatePanel.hide()
+	
 	for i in searchCandidateContainer.get_children():
 		searchCandidateContainer.remove_child(i)
 		i.queue_free()
@@ -60,8 +71,13 @@ func _load_search_candidates():
 	for i in range(len(wordleData)):
 		var wd = wordleData[i]
 		var key = wd[0]
-		if Global.wordle_type[Global.wordle_headers[1]] == "str":
-			key += " (" + wd[1] + ")"
+		
+		var j = 0
+		while j < len(Global.wordle_headers): 
+			if Global.wordle_type[Global.wordle_headers[j]] == "str":
+				key += " (" + wd[j] + ")"
+				break
+			j += 1
 			
 		var btn = Button.new()
 		btn.name = "searchButton["+str(i)+"]"
@@ -78,12 +94,27 @@ func _guess_candidate_click(current_index: int):
 			btn.hide()
 	
 	var row = wordleData[current_index]
-	for cell in row:
-		var gridItem = _generate_default_grid_items(cell)
-		# TODO: dont forget to colorize the column to green (exact match) / yellow (partial) / red (wrong)
-		#gridItem.add_theme_stylebox_override()
-		judgeContainer.add_child(gridItem)
+	alreadyPicked[current_index] = true
+	
+	searchCandidatePanel.hide()
 		
+	for i in range(len(row)):
+		var styleBox = StyleBoxFlat.new()
+		var result = Global.compare_cell(i, randomCandidatePicked, current_index)
+		if result == 1:
+			styleBox.bg_color = correctBgColor
+		elif result == 2:
+			styleBox.bg_color = partialCorrectBgColor
+		else:
+			styleBox.bg_color = wrongBgColor
+		var cell = row[i]
+		if result == 3:
+			cell += " <"
+		elif result == 4:
+			cell += " >"
+		var gridItem = _generate_default_grid_items(cell)
+		gridItem.add_theme_stylebox_override("panel", styleBox)
+		judgeContainer.add_child(gridItem)
 
 func _render_column_header():
 	judgeContainer.columns = len(Global.wordle_headers)
@@ -99,6 +130,13 @@ func _on_btn_back_pressed() -> void:
 	Global.reset_wordle_selection()
 
 func _on_btn_reset_pressed() -> void:
+	for child in judgeContainer.get_children():
+		judgeContainer.remove_child(child)
+	_render_column_header()
+	
+	alreadyPicked = {}
+	remainingScore = 100.0
+	
 	_pick_random_candidate()
 
 func _on_btn_sound_pressed() -> void:
@@ -113,12 +151,22 @@ func _on_search_input_text_changed(new_text: String) -> void:
 		inputDebouncer.start(0.5)
 	
 func _filter_loaded_candidates() -> void:
-	for i in searchCandidateContainer.get_children():
-		var btn = i as Button
-		if lastKnownInput in btn.text.to_lower():
+	var hasResult = false
+	
+	for i in range(searchCandidateContainer.get_child_count()):
+		var ch = searchCandidateContainer.get_child(i) 
+		var btn = ch as Button
+		if i in alreadyPicked:
+			btn.hide()
+		elif lastKnownInput in btn.text.to_lower():
 			btn.show()
+			hasResult = true
 		else:
 			btn.hide()
+	if hasResult:
+		searchCandidatePanel.show()
+	else:
+		searchCandidatePanel.hide()
 	
 func _generate_default_grid_items(labelText: String) -> PanelContainer:
 	var label = Label.new()

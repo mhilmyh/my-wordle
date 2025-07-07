@@ -101,7 +101,7 @@ func parse_csv(file_path: String) -> Array:
 		var fa: FileAccess = FileAccess.open(file_path, FileAccess.READ)
 		while not fa.eof_reached():
 			var line = fa.get_line()
-			var row = line.split(",")  # Split by commas
+			var row = line.split(";")  # Split by commas
 			
 			if len(row) == 0 or (len(row) == 1 and row[0] == ""):
 				break
@@ -126,4 +126,51 @@ func is_supported_wordle_type(value: String) -> bool:
 	if value == "":
 		return false
 		
-	return value in ["str", "int", "float", "enum"]
+	return value in ["str", "int", "enum"]
+	
+# compare_cell: 
+# 4 -> greater than
+# 3 -> lower than
+# 2 -> partial match
+# 1 -> exact match
+# 0 -> wrong
+func compare_cell(column_idx: int, row_target_idx: int, row_guess_idx: int) -> int:
+	var header = wordle_headers[column_idx]
+	var headerType = wordle_type[header]
+	if not is_supported_wordle_type(headerType):
+		headerType = "str"
+	
+	var target_cell_data = wordle_data[row_target_idx][column_idx]
+	var guess_cell_data = wordle_data[row_guess_idx][column_idx]
+	
+	if headerType == "str":
+		return 1 if target_cell_data == guess_cell_data else 0
+	elif headerType == "int":
+		var target_cell_data_int = int(target_cell_data)
+		var guess_cell_data_int = int(guess_cell_data)
+		if guess_cell_data_int == target_cell_data_int:
+			return 1
+		elif guess_cell_data_int > target_cell_data_int:
+			return 4
+		elif guess_cell_data_int < target_cell_data_int:
+			return 3
+	elif headerType == "enum":
+		var target_cell_data_arr = String(target_cell_data).split(",")
+		var guess_cell_data_arr = String(guess_cell_data).split(",")
+
+		var cnt = 0
+		for g in guess_cell_data_arr:
+			if g in target_cell_data:
+				cnt += 1
+		if len(target_cell_data_arr) == len(guess_cell_data_arr):
+			if cnt == len(guess_cell_data_arr):
+				return 1
+			else:
+				return 2
+		else:
+			if cnt == len(guess_cell_data_arr):
+				return 2
+			else:
+				return 0
+	return 0
+	

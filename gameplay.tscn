@@ -1,9 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://ewppgwtsqru4"]
+[gd_scene load_steps=12 format=3 uid="uid://ewppgwtsqru4"]
 
 [ext_resource type="Theme" uid="uid://dt7q57jxovxw2" path="res://my-theme.tres" id="1_ej4tk"]
 [ext_resource type="Script" uid="uid://dpt4orim8ou7q" path="res://gameplay.gd" id="2_oe8ih"]
 [ext_resource type="Script" uid="uid://ben5lsbcmlddl" path="res://line_edit.gd" id="3_oe8ih"]
 [ext_resource type="FontFile" uid="uid://clq6vjelhehe1" path="res://Pixellari.ttf" id="4_xuee5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xuee5"]
+bg_color = Color(0.259294, 0.259294, 0.259294, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_smepj"]
 content_margin_left = 4.0
@@ -131,35 +134,6 @@ offset_top = -75.848
 offset_right = 93.8079
 offset_bottom = 76.152
 
-[node name="vbox_search" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.232
-anchor_top = 0.309
-anchor_right = 0.81
-anchor_bottom = 0.37
-offset_left = -0.264008
-offset_top = -0.23201
-offset_right = -0.120056
-offset_bottom = 0.23999
-
-[node name="search_input" type="LineEdit" parent="vbox_search"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("3_oe8ih")
-
-[node name="scroll_container_search" type="ScrollContainer" parent="vbox_search"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-
-[node name="vbox_search_candidate" type="VBoxContainer" parent="vbox_search/scroll_container_search"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = SubResource("Theme_oe8ih")
-theme_override_constants/separation = 4
-
 [node name="margin_container_side" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 9
@@ -187,18 +161,30 @@ text = "Reset"
 layout_mode = 2
 text = "Sound"
 
-[node name="scroll_container_result" type="ScrollContainer" parent="."]
+[node name="sound_player" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+autoplay = true
+
+[node name="input_debouncer" type="Timer" parent="."]
+
+[node name="result_margin" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.463
+anchor_top = 0.401
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = -0.0240173
-offset_right = -5.0
-offset_bottom = -4.0
+offset_top = 0.151978
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
-[node name="grid_container" type="GridContainer" parent="scroll_container_result"]
+[node name="scroll_container_result" type="ScrollContainer" parent="result_margin"]
+layout_mode = 2
+
+[node name="grid_container" type="GridContainer" parent="result_margin/scroll_container_result"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -206,14 +192,64 @@ theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 8
 columns = 4
 
-[node name="sound_player" type="AudioStreamPlayer" parent="."]
-volume_db = -10.0
-autoplay = true
+[node name="vbox_search" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.232
+anchor_top = 0.309
+anchor_right = 0.81
+anchor_bottom = 0.37
+offset_left = -0.264008
+offset_top = -0.23201
+offset_right = -0.119995
+offset_bottom = 104.24
+theme_override_constants/separation = 2
 
-[node name="input_debouncer" type="Timer" parent="."]
+[node name="search_input" type="LineEdit" parent="vbox_search"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("3_oe8ih")
 
-[connection signal="text_changed" from="vbox_search/search_input" to="." method="_on_search_input_text_changed"]
+[node name="bg_search_result" type="Panel" parent="vbox_search"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xuee5")
+
+[node name="scroll_container_search" type="ScrollContainer" parent="vbox_search/bg_search_result"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+anchor_right = 1.0
+offset_top = 2.0
+offset_bottom = 102.0
+
+[node name="vbox_search_candidate" type="VBoxContainer" parent="vbox_search/bg_search_result/scroll_container_search"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_oe8ih")
+theme_override_constants/separation = 4
+
+[node name="score_margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -94.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="score" type="Label" parent="score_margin"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Score: 100"
+
 [connection signal="pressed" from="margin_container_side/vbox_container/btn_back" to="." method="_on_btn_back_pressed"]
 [connection signal="pressed" from="margin_container_side/vbox_container/btn_reset" to="." method="_on_btn_reset_pressed"]
 [connection signal="pressed" from="margin_container_side/vbox_container/btn_sound" to="." method="_on_btn_sound_pressed"]
 [connection signal="finished" from="sound_player" to="." method="_on_sound_player_finished"]
+[connection signal="text_changed" from="vbox_search/search_input" to="." method="_on_search_input_text_changed"]
