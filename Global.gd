@@ -7,6 +7,9 @@ var wordle_headers: Array = []
 var wordle_type: Dictionary = {}
 var selected_wordle: int = -1
 
+var httpRequest = HTTPRequest.new()
+var image_cached: Dictionary[String,ImageTexture] = {}
+
 func reset_wordle_selection():
 	selected_wordle = -1
 	wordle_data = []
@@ -126,7 +129,7 @@ func is_supported_wordle_type(value: String) -> bool:
 	if value == "":
 		return false
 		
-	return value in ["str", "int", "enum"]
+	return value in ["str", "int", "enum", "img"]
 	
 # compare_cell: 
 # 4 -> greater than
@@ -134,6 +137,7 @@ func is_supported_wordle_type(value: String) -> bool:
 # 2 -> partial match
 # 1 -> exact match
 # 0 -> wrong
+# -1 -> no need color
 func compare_cell(column_idx: int, row_target_idx: int, row_guess_idx: int) -> int:
 	var header = wordle_headers[column_idx]
 	var headerType = wordle_type[header]
@@ -143,7 +147,9 @@ func compare_cell(column_idx: int, row_target_idx: int, row_guess_idx: int) -> i
 	var target_cell_data = wordle_data[row_target_idx][column_idx]
 	var guess_cell_data = wordle_data[row_guess_idx][column_idx]
 	
-	if headerType == "str":
+	if headerType == "img":
+		return -1
+	elif headerType == "str":
 		return 1 if target_cell_data == guess_cell_data else 0
 	elif headerType == "int":
 		var target_cell_data_int = int(target_cell_data)
@@ -174,3 +180,22 @@ func compare_cell(column_idx: int, row_target_idx: int, row_guess_idx: int) -> i
 				return 0
 	return 0
 	
+func load_image_from_url(url: String) -> bool:
+	httpRequest.connect("request_completed", func(result, response_code, headers, body): _on_request_completed(url, result, response_code, headers, body))
+	var err = httpRequest.request(url)
+	if err != OK:
+		print("load_image_from_url: ", err)
+		return false
+	return true
+	
+func _on_request_completed(url, result, response_code, headers, body):
+	var image = Image.new()
+	var err = image.load_png_from_buffer(body)
+	if err != OK:
+		print("_on_request_completed: ", err)
+	var texture = ImageTexture.new()
+	texture.create_from_image(image)
+	image_cached[url] = texture
+	
+	
+		

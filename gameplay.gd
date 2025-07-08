@@ -10,6 +10,7 @@ extends Control
 @onready var inputDebouncer = $input_debouncer
 @onready var lastKnownInput = ""
 
+@onready var noBgColor = Color(0.0, 0.0, 0.0)
 @onready var correctBgColor = Color(0.2, 0.8, 0.2)
 @onready var partialCorrectBgColor = Color(0.8, 0.8, 0.2)
 @onready var wrongBgColor = Color(0.8, 0.2, 0.2)
@@ -103,18 +104,22 @@ func _guess_candidate_click(current_index: int):
 	for i in range(len(row)):
 		var styleBox = StyleBoxFlat.new()
 		var result = Global.compare_cell(i, randomCandidatePicked, current_index)
-		if result == 1:
+		if result == -1:
+			styleBox.bg_color = noBgColor
+		elif result == 1:
 			styleBox.bg_color = correctBgColor
 			correctGuess += 1
 		elif result == 2:
 			styleBox.bg_color = partialCorrectBgColor
 		else:
 			styleBox.bg_color = wrongBgColor
+		
 		var cell = row[i]
 		if result == 3:
 			cell += " <"
 		elif result == 4:
 			cell += " >"
+			
 		var gridItem = _generate_default_grid_items(cell)
 		gridItem.add_theme_stylebox_override("panel", styleBox)
 		judgeContainer.add_child(gridItem)

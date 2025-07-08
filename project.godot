@@ -10,7 +10,9 @@ config_version=5
 
 [application]
 
-config/name="New Game Project"
+config/name="My Wordle"
+config/description="Simple game "
+config/version="1.0.0"
 run/main_scene="uid://vvghsleoo8kj"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -23,6 +25,11 @@ Global="*res://Global.gd"
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[gui]
+
+theme/version="1.0.0"
+theme/description="Simple game "
 
 [rendering]
 
